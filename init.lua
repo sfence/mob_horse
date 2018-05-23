@@ -138,9 +138,9 @@ mobs:register_mob("mob_horse:horse", {
 mobs:spawn({
 	name = "mob_horse:horse",
 	nodes = {"default:dirt_with_grass", "ethereal:dry_dirt"},
-	min_light = 10,
+	min_light = 14,
 	interval = 60,
-	chance = 15000,
+	chance = 16000,
 	min_height = 10,
 	max_height = 31000,
 	day_toggle = true,
