@@ -22,7 +22,7 @@ mobs:register_mob("mob_horse:horse", {
 		run_end = 100,
 	},
 	textures = {
-		{"mobs_horse.png"},
+		{"mobs_horse.png"}, -- textures by Mjollna
 		{"mobs_horsepeg.png"},
 		{"mobs_horseara.png"}
 	},
