@@ -3,6 +3,14 @@
 local MP = minetest.get_modpath(minetest.get_current_modname())
 local S, NS = dofile(MP .. "/intllib.lua")
 
+
+-- 0.4.17 or 5.0 check
+local y_off = 20
+if minetest.registered_nodes["default:permafrost"] then
+	y_off = 10
+end
+
+
 -- rideable horse
 
 mobs:register_mob("mob_horse:horse", {
@@ -53,7 +61,7 @@ mobs:register_mob("mob_horse:horse", {
 			self.max_speed_reverse = 2
 			self.accel = 6
 			self.terrain_type = 3
-			self.driver_attach_at = {x = 0, y = 20, z = -2}
+			self.driver_attach_at = {x = 0, y = y_off, z = -2}
 			self.driver_eye_offset = {x = 0, y = 3, z = 0}
 		end
 
