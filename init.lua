@@ -81,9 +81,12 @@ mobs:register_mob("mob_horse:horse", {
 		-- drop saddle when horse is killed while riding
 		-- also detach from horse properly
 		if self.driver then
+
 			minetest.add_item(pos, "mobs:saddle")
+
 			mobs.detach(self.driver, {x = 1, y = 0, z = 1})
-self.saddle = nil
+
+			self.saddle = nil
 		end
 
 		-- drop any horseshoes added
@@ -127,7 +130,7 @@ self.saddle = nil
 					minetest.add_item(clicker:get_pos(), "mobs:saddle")
 				end
 
-self.saddle = nil
+				self.saddle = nil
 
 			-- attach player to horse
 			elseif (not self.driver and not self.child
@@ -142,7 +145,7 @@ self.saddle = nil
 					inv:remove_item("main", "mobs:saddle")
 				end
 
-self.saddle = true
+				self.saddle = true
 			end
 		end
 
@@ -166,7 +169,8 @@ mobs:register_egg("mob_horse:horse", S("Horse"), "wool_brown.png", 1)
 
 
 -- horseshoe helper function
-local apply_shoes = function(name, itemstack, obj, shoes, speed, jump, reverse)
+local apply_shoes = function(name, itemstack, obj, shoes, speed, jump,
+		reverse, overlay)
 
 	if obj.type ~= "object" then return end
 
@@ -185,6 +189,17 @@ local apply_shoes = function(name, itemstack, obj, shoes, speed, jump, reverse)
 		ent.accel = speed
 		ent.shoed = shoes
 
+		-- apply horseshoe overlay to current horse texture
+		if overlay then
+
+			local ov = ent.base_texture
+
+			ov[1] = ov[1] .. "^" .. overlay
+
+			mob:set_properties({textures = ov})
+		end
+
+		-- show horse speed and jump stats with shoes fitted
 		minetest.chat_send_player(name, S("Horse shoes fitted -")
 				.. S(" speed: ") .. speed
 				.. S(" , jump height: ") .. jump
@@ -203,7 +218,7 @@ minetest.register_craftitem(":mobs:horseshoe_steel", {
 	inventory_image = "mobs_horseshoe_steel.png",
 	on_use = function(itemstack, user, pointed_thing)
 		return apply_shoes(user:get_player_name(), itemstack, pointed_thing,
-				"mobs:horseshoe_steel", 7, 4, 2)
+				"mobs:horseshoe_steel", 7, 4, 2, "mobs_horseshoe_steelo.png")
 	end,
 })
 
@@ -222,7 +237,7 @@ minetest.register_craftitem(":mobs:horseshoe_bronze", {
 	inventory_image = "mobs_horseshoe_bronze.png",
 	on_use = function(itemstack, user, pointed_thing)
 		return apply_shoes(user:get_player_name(), itemstack, pointed_thing,
-				"mobs:horseshoe_bronze", 7, 4, 4)
+				"mobs:horseshoe_bronze", 7, 4, 4, "mobs_horseshoe_bronzeo.png")
 	end,
 })
 
@@ -241,7 +256,7 @@ minetest.register_craftitem(":mobs:horseshoe_mese", {
 	inventory_image = "mobs_horseshoe_mese.png",
 	on_use = function(itemstack, user, pointed_thing)
 		return apply_shoes(user:get_player_name(), itemstack, pointed_thing,
-				"mobs:horseshoe_mese", 9, 5, 8)
+				"mobs:horseshoe_mese", 9, 5, 8, "mobs_horseshoe_meseo.png")
 	end,
 })
 
@@ -260,7 +275,7 @@ minetest.register_craftitem(":mobs:horseshoe_diamond", {
 	inventory_image = "mobs_horseshoe_diamond.png",
 	on_use = function(itemstack, user, pointed_thing)
 		return apply_shoes(user:get_player_name(), itemstack, pointed_thing,
-				"mobs:horseshoe_diamond", 10, 6, 6)
+				"mobs:horseshoe_diamond", 10, 6, 6, "mobs_horseshoe_diamondo.png")
 	end,
 })
 
