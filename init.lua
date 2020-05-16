@@ -181,12 +181,8 @@ mobs:register_mob("mob_horse:horse", {
 
 				-- apply horseshoe overlay to current horse texture
 				if overlay then
-
-					local ov = self.base_texture
-
-					ov[1] = ov[1] .. "^" .. overlay
-
-					self.object:set_properties({textures = ov})
+					self.texture_mods = "^" .. overlay
+					self.object:set_texture_mod(self.texture_mods)
 				end
 
 				-- show horse speed and jump stats with shoes fitted
