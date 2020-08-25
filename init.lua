@@ -1,8 +1,5 @@
 
--- intllib
-local MP = minetest.get_modpath(minetest.get_current_modname())
-local S, NS = dofile(MP .. "/intllib.lua")
-
+local S = mobs.intllib
 
 -- 0.4.17 or 5.0 check
 local y_off = 20
