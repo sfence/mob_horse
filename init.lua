@@ -1,5 +1,8 @@
 
-local S = mobs.intllib
+-- Load support for intllib.
+local MP = minetest.get_modpath(minetest.get_current_modname())
+local S = minetest.get_translator and minetest.get_translator("mob_horse") or
+		dofile(MP .. "/intllib.lua")
 
 -- 0.4.17 or 5.0 check
 local y_off = 20
@@ -15,9 +18,7 @@ local shoes = {
 	["mobs:horseshoe_diamond"] = {10, 6, 6, "mobs_horseshoe_diamondo.png"}
 }
 
-
 -- rideable horse
-
 mobs:register_mob("mob_horse:horse", {
 	type = "animal",
 	visual = "mesh",
