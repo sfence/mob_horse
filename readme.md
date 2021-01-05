@@ -1,5 +1,9 @@
 # MOB Horse
 
+## License
+MIT 2020 TenPlus and others for source code
+CC by 3.0 2020 TenPlus and others for media files
+
 ### Spawning
 There are three different horse textures (white, brown, black) which will spawn on green grassy areas and dry dirt areas in Ethereal mapgen.
 
