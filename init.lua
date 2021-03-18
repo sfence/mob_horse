@@ -29,7 +29,12 @@ mobs:register_mob("mob_horse:horse", {
 		speed_normal = 15,
 		speed_run = 30,
 		stand_start = 25,
-		stand_end = 75,
+		stand_end = 50, -- 75
+		stand2_start = 25,
+		stand2_end = 25,
+		stand3_start = 55,
+		stand3_end = 75,
+		stand3_loop = false,
 		walk_start = 75,
 		walk_end = 100,
 		run_start = 75,
