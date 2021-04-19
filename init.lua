@@ -16,7 +16,7 @@ local shoes = {
 	["mobs:horseshoe_bronze"] = {7, 4, 4, "mobs_horseshoe_bronzeo.png"},
 	["mobs:horseshoe_mese"] = {9, 5, 8, "mobs_horseshoe_meseo.png"},
 	["mobs:horseshoe_diamond"] = {10, 6, 6, "mobs_horseshoe_diamondo.png"},
-	["mobs:horseshoe_crystal"] = {12, 7, 9, "mobs_horseshoe_crystalo.png"}
+	["mobs:horseshoe_crystal"] = {11, 6, 9, "mobs_horseshoe_crystalo.png"}
 }
 
 -- rideable horse
