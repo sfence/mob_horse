@@ -15,7 +15,8 @@ local shoes = {
 	["mobs:horseshoe_steel"] = {7, 4, 2, "mobs_horseshoe_steelo.png"},
 	["mobs:horseshoe_bronze"] = {7, 4, 4, "mobs_horseshoe_bronzeo.png"},
 	["mobs:horseshoe_mese"] = {9, 5, 8, "mobs_horseshoe_meseo.png"},
-	["mobs:horseshoe_diamond"] = {10, 6, 6, "mobs_horseshoe_diamondo.png"}
+	["mobs:horseshoe_diamond"] = {10, 6, 6, "mobs_horseshoe_diamondo.png"},
+	["mobs:horseshoe_crystal"] = {12, 7, 9, "mobs_horseshoe_crystalo.png"}
 }
 
 -- rideable horse
@@ -292,6 +293,25 @@ minetest.register_craft({
 	}
 })
 
+-- crystal horseshoes
+if minetest.get_modpath("ethereal") then
+
+minetest.register_craftitem(":mobs:horseshoe_crystal", {
+	description = S("Crystal HorseShoes (use on horse to apply)"),
+	inventory_image = "mobs_horseshoe_crystal.png",
+})
+
+minetest.register_craft({
+	output = "mobs:horseshoe_crystal",
+	recipe = {
+		{"", "ethereal:crystal_block", ""},
+		{"ethereal:crystal_ingot", "", "ethereal:crystal_ingot"},
+		{"ethereal:crystal_ingot", "", "ethereal:crystal_ingot"},
+	}
+})
+
+end
+
 -- lucky blocks
 if minetest.get_modpath("lucky_block") then
 
@@ -300,6 +320,7 @@ lucky_block:add_blocks({
 	{"dro", {"mobs:horseshoe_bronze"}},
 	{"dro", {"mobs:horseshoe_mese"}},
 	{"dro", {"mobs:horseshoe_diamond"}},
+	{"dro", {"mobs:horseshoe_crystal"}}
 })
 
 end
