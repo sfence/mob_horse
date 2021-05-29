@@ -19,7 +19,7 @@ local shoes = {
 }
 
 -- rideable horse
-mobs:register_mob("mob_horse:horse", {
+mobs:register_mob("hades_horse:horse", {
 	type = "animal",
 	visual = "mesh",
 	visual_size = {x = 1.20, y = 1.20},
@@ -46,8 +46,8 @@ mobs:register_mob("mob_horse:horse", {
 	walk_chance = 60,
 	view_range = 5,
 	follow = {
-		"farming:wheat", "default:apple", "farming:oat",
-		"farming:barley", "farming:corn"},
+		"hades_farming:wheat", "hades_trees:apple", "hades_extrafarming:oat",
+		"hades_extrafarming:barley", "hades_extrafarming:corn"},
 	passive = true,
 	hp_min = 12,
 	hp_max = 16,
@@ -213,8 +213,10 @@ mobs:register_mob("mob_horse:horse", {
 	end,
 })
 
+--[[
+-- no spawns for Hades Revisited
 mobs:spawn({
-	name = "mob_horse:horse",
+	name = "hades_horse:horse",
 	nodes = {"default:dirt_with_grass", "ethereal:dry_dirt"},
 	min_light = 14,
 	interval = 60,
@@ -223,8 +225,9 @@ mobs:spawn({
 	max_height = 31000,
 	day_toggle = true,
 })
+--]]
 
-mobs:register_egg("mob_horse:horse", S("Horse"), "wool_brown.png", 1)
+mobs:register_egg("hades_horse:horse", S("Horse"), "wool_brown.png", 1)
 
 
 -- steel horseshoes
@@ -236,9 +239,9 @@ minetest.register_craftitem(":mobs:horseshoe_steel", {
 minetest.register_craft({
 	output = "mobs:horseshoe_steel",
 	recipe = {
-		{"", "default:steelblock", ""},
-		{"default:steel_ingot", "", "default:steel_ingot"},
-		{"default:steel_ingot", "", "default:steel_ingot"},
+		{"", "hades_core:steelblock", ""},
+		{"hades_core:steel_ingot", "", "hades_core:steel_ingot"},
+		{"hades_core:steel_ingot", "", "hades_core:steel_ingot"},
 	}
 })
 
@@ -251,9 +254,9 @@ minetest.register_craftitem(":mobs:horseshoe_bronze", {
 minetest.register_craft({
 	output = "mobs:horseshoe_bronze",
 	recipe = {
-		{"", "default:bronzeblock", ""},
-		{"default:bronze_ingot", "", "default:bronze_ingot"},
-		{"default:bronze_ingot", "", "default:bronze_ingot"},
+		{"", "hades_core:bronzeblock", ""},
+		{"hades_core:bronze_ingot", "", "hades_core:bronze_ingot"},
+		{"hades_core:bronze_ingot", "", "hades_core:bronze_ingot"},
 	}
 })
 
@@ -266,9 +269,9 @@ minetest.register_craftitem(":mobs:horseshoe_mese", {
 minetest.register_craft({
 	output = "mobs:horseshoe_mese",
 	recipe = {
-		{"", "default:mese", ""},
-		{"default:mese_crystal_fragment", "", "default:mese_crystal_fragment"},
-		{"default:mese_crystal_fragment", "", "default:mese_crystal_fragment"},
+		{"", "hades_core:mese", ""},
+		{"hades_core:mese_crystal_fragment", "", "hades_core:mese_crystal_fragment"},
+		{"hades_core:mese_crystal_fragment", "", "hades_core:mese_crystal_fragment"},
 	}
 })
 
@@ -281,9 +284,9 @@ minetest.register_craftitem(":mobs:horseshoe_diamond", {
 minetest.register_craft({
 	output = "mobs:horseshoe_diamond",
 	recipe = {
-		{"", "default:diamondblock", ""},
-		{"default:diamond", "", "default:diamond"},
-		{"default:diamond", "", "default:diamond"},
+		{"", "hades_core:diamondblock", ""},
+		{"hades_core:diamond", "", "hades_core:diamond"},
+		{"hades_core:diamond", "", "hades_core:diamond"},
 	}
 })
 
