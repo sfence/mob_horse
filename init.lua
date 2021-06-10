@@ -92,22 +92,20 @@ mobs:register_mob("mob_horse:horse", {
 
 	on_die = function(self, pos)
 
-		-- drop saddle when horse is killed while riding
-		-- also detach from horse properly
+		-- detach player from horse properly
 		if self.driver then
-
-			minetest.add_item(pos, "mobs:saddle")
-
 			mobs.detach(self.driver, {x = 1, y = 0, z = 1})
+		end
 
-			self.saddle = nil
+		-- drop saddle if found
+		if self.saddle then
+			minetest.add_item(pos, "mobs:saddle")
 		end
 
 		-- drop any horseshoes added
 		if self.shoed then
 			minetest.add_item(pos, self.shoed)
 		end
-
 	end,
 
 	do_punch = function(self, hitter)
@@ -149,29 +147,27 @@ mobs:register_mob("mob_horse:horse", {
 
 				mobs.detach(clicker, {x = 1, y = 0, z = 1})
 
-				-- add saddle back to inventory
-				if inv:room_for_item("main", "mobs:saddle") then
-					inv:add_item("main", "mobs:saddle")
-				else
-					minetest.add_item(clicker:get_pos(), "mobs:saddle")
-				end
+				return
+			end
 
-				self.saddle = nil
-
-			-- attach player to horse
-			elseif (not self.driver and not self.child
-			and clicker:get_wielded_item():get_name() == "mobs:saddle")
-			or self.saddle then
-
-				self.object:set_properties({stepheight = 1.1})
-				mobs.attach(self, clicker)
-
-				-- take saddle from inventory
-				if not self.saddle then
-					inv:remove_item("main", "mobs:saddle")
-				end
+			-- attach saddle to horse
+			if not self.driver
+			and not self.child
+			and clicker:get_wielded_item():get_name() == "mobs:saddle"
+			and not self.saddle then
 
 				self.saddle = true
+				self.order = "stand"
+				self.object:set_properties({stepheight = 1.1})
+
+				-- take saddle from inventory
+				inv:remove_item("main", "mobs:saddle")
+
+				self.texture_mods = self.texture_mods .. "^mobs_saddle_overlay.png"
+
+				self.object:set_texture_mod(self.texture_mods)
+
+				return
 			end
 
 			-- apply horseshoes
@@ -196,6 +192,12 @@ mobs:register_mob("mob_horse:horse", {
 				-- apply horseshoe overlay to current horse texture
 				if overlay then
 					self.texture_mods = "^" .. overlay
+
+					if self.saddle then
+						self.texture_mods = self.texture_mods
+							.. "^mobs_saddle_overlay.png"
+					end
+
 					self.object:set_texture_mod(self.texture_mods)
 				end
 
@@ -215,8 +217,13 @@ mobs:register_mob("mob_horse:horse", {
 		end
 
 		-- used to capture horse with magic lasso
-		mobs:capture_mob(self, clicker, 0, 0, 80, false, nil)
-	end,
+		if mobs:capture_mob(self, clicker, nil, nil, 80, false, nil) then return end
+
+		-- ride horse if saddled
+		if self.saddle and self.owner == player_name then
+			mobs.attach(self, clicker)
+		end
+	end
 })
 
 mobs:spawn({
