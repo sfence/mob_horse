@@ -217,7 +217,7 @@ mobs:register_mob("mob_horse:horse", {
 		end
 
 		-- used to capture horse with magic lasso
-		if mobs:capture_mob(self, clicker, nil, nil, 80, false, nil) then return end
+		if mobs:capture_mob(self, clicker, nil, nil, 100, false, nil) then return end
 
 		-- ride horse if saddled
 		if self.saddle and self.owner == player_name then
