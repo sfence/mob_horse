@@ -77,6 +77,7 @@ mobs:register_mob("mob_horse:horse", {
 			self.terrain_type = 3
 			self.driver_attach_at = {x = 0, y = y_off, z = -2}
 			self.driver_eye_offset = {x = 0, y = 3, z = 0}
+			self.driver_scale = {x = 0.8, y = 0.8} -- shrink driver to fit model
 		end
 
 		-- if driver present allow control of horse
