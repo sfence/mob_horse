@@ -1,14 +1,16 @@
 
 -- Load support for intllib.
-local MP = minetest.get_modpath(minetest.get_current_modname())
+local MP = minetest.get_modpath(minetest.get_current_modname()) .. "/"
 local S = minetest.get_translator and minetest.get_translator("mob_horse") or
-		dofile(MP .. "/intllib.lua")
+		dofile(MP .. "intllib.lua")
+
 
 -- 0.4.17 or 5.0 check
 local y_off = 20
 if minetest.features.object_independent_selectionbox then
 	y_off = 10
 end
+
 
 -- horse shoes (speed, jump, break, overlay texture)
 local shoes = {
@@ -18,6 +20,7 @@ local shoes = {
 	["mobs:horseshoe_diamond"] = {10, 6, 6, "mobs_horseshoe_diamondo.png"},
 	["mobs:horseshoe_crystal"] = {11, 6, 9, "mobs_horseshoe_crystalo.png"}
 }
+
 
 -- rideable horse
 mobs:register_mob("mob_horse:horse", {
@@ -39,7 +42,7 @@ mobs:register_mob("mob_horse:horse", {
 		walk_start = 75,
 		walk_end = 100,
 		run_start = 75,
-		run_end = 100,
+		run_end = 100
 	},
 	textures = {
 		{"mobs_horse.png"}, -- textures by Mjollna
@@ -227,16 +230,28 @@ mobs:register_mob("mob_horse:horse", {
 	end
 })
 
-mobs:spawn({
-	name = "mob_horse:horse",
-	nodes = {"default:dirt_with_grass", "ethereal:dry_dirt"},
-	min_light = 14,
-	interval = 60,
-	chance = 16000,
-	min_height = 10,
-	max_height = 31000,
-	day_toggle = true,
-})
+
+-- check for custom spawn.lua
+local input = io.open(MP .. "spawn.lua", "r")
+
+if input then
+	input:close()
+	input = nil
+	dofile(MP .. "spawn.lua")
+else
+
+	mobs:spawn({
+		name = "mob_horse:horse",
+		nodes = {"default:dirt_with_grass", "ethereal:dry_dirt"},
+		min_light = 14,
+		interval = 60,
+		chance = 16000,
+		min_height = 10,
+		max_height = 31000,
+		day_toggle = true
+	})
+end
+
 
 mobs:register_egg("mob_horse:horse", S("Horse"), "wool_brown.png", 1)
 
@@ -252,14 +267,14 @@ minetest.register_craft({
 	recipe = {
 		{"", "default:steelblock", ""},
 		{"default:steel_ingot", "", "default:steel_ingot"},
-		{"default:steel_ingot", "", "default:steel_ingot"},
+		{"default:steel_ingot", "", "default:steel_ingot"}
 	}
 })
 
 -- bronze horseshoes
 minetest.register_craftitem(":mobs:horseshoe_bronze", {
 	description = S("Bronze HorseShoes (use on horse to apply)"),
-	inventory_image = "mobs_horseshoe_bronze.png",
+	inventory_image = "mobs_horseshoe_bronze.png"
 })
 
 minetest.register_craft({
@@ -267,14 +282,14 @@ minetest.register_craft({
 	recipe = {
 		{"", "default:bronzeblock", ""},
 		{"default:bronze_ingot", "", "default:bronze_ingot"},
-		{"default:bronze_ingot", "", "default:bronze_ingot"},
+		{"default:bronze_ingot", "", "default:bronze_ingot"}
 	}
 })
 
 -- mese horseshoes
 minetest.register_craftitem(":mobs:horseshoe_mese", {
 	description = S("Mese HorseShoes (use on horse to apply)"),
-	inventory_image = "mobs_horseshoe_mese.png",
+	inventory_image = "mobs_horseshoe_mese.png"
 })
 
 minetest.register_craft({
@@ -282,14 +297,14 @@ minetest.register_craft({
 	recipe = {
 		{"", "default:mese", ""},
 		{"default:mese_crystal_fragment", "", "default:mese_crystal_fragment"},
-		{"default:mese_crystal_fragment", "", "default:mese_crystal_fragment"},
+		{"default:mese_crystal_fragment", "", "default:mese_crystal_fragment"}
 	}
 })
 
 -- diamond horseshoes
 minetest.register_craftitem(":mobs:horseshoe_diamond", {
 	description = S("Diamond HorseShoes (use on horse to apply)"),
-	inventory_image = "mobs_horseshoe_diamond.png",
+	inventory_image = "mobs_horseshoe_diamond.png"
 })
 
 minetest.register_craft({
@@ -297,7 +312,7 @@ minetest.register_craft({
 	recipe = {
 		{"", "default:diamondblock", ""},
 		{"default:diamond", "", "default:diamond"},
-		{"default:diamond", "", "default:diamond"},
+		{"default:diamond", "", "default:diamond"}
 	}
 })
 
@@ -306,7 +321,7 @@ if minetest.get_modpath("ethereal") then
 
 minetest.register_craftitem(":mobs:horseshoe_crystal", {
 	description = S("Crystal HorseShoes (use on horse to apply)"),
-	inventory_image = "mobs_horseshoe_crystal.png",
+	inventory_image = "mobs_horseshoe_crystal.png"
 })
 
 minetest.register_craft({
@@ -314,11 +329,12 @@ minetest.register_craft({
 	recipe = {
 		{"", "ethereal:crystal_block", ""},
 		{"ethereal:crystal_ingot", "", "ethereal:crystal_ingot"},
-		{"ethereal:crystal_ingot", "", "ethereal:crystal_ingot"},
+		{"ethereal:crystal_ingot", "", "ethereal:crystal_ingot"}
 	}
 })
 
 end
+
 
 -- lucky blocks
 if minetest.get_modpath("lucky_block") then
