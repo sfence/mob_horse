@@ -1,8 +1,29 @@
 
 -- Load support for intllib.
 local MP = minetest.get_modpath(minetest.get_current_modname()) .. "/"
-local S = minetest.get_translator and minetest.get_translator("mob_horse") or
-		dofile(MP .. "intllib.lua")
+
+-- Check for translation method
+local S
+if minetest.get_translator ~= nil then
+	S = minetest.get_translator("mob_horse") -- 5.x translation function
+else
+	if minetest.get_modpath("intllib") then
+		dofile(minetest.get_modpath("intllib") .. "/init.lua")
+		if intllib.make_gettext_pair then
+			gettext, ngettext = intllib.make_gettext_pair() -- new gettext method
+		else
+			gettext = intllib.Getter() -- old text file method
+		end
+		S = gettext
+	else -- boilerplate function
+		S = function(str, ...)
+			local args = {...}
+			return str:gsub("@%d+", function(match)
+				return args[tonumber(match:sub(2))]
+			end)
+		end
+	end
+end
 
 
 -- 0.4.17 or 5.0 check
@@ -348,3 +369,6 @@ lucky_block:add_blocks({
 })
 
 end
+
+
+print("[MOD] Mob Horse loaded")
