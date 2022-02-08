@@ -33,7 +33,7 @@ if minetest.features.object_independent_selectionbox then
 end
 
 
--- horse shoes (speed, jump, break, overlay texture)
+-- horse shoes (speed, jump, brake/reverse speed, overlay texture)
 local shoes = {
 	["mobs:horseshoe_steel"] = {7, 4, 2, "mobs_horseshoe_steelo.png"},
 	["mobs:horseshoe_bronze"] = {7, 4, 4, "mobs_horseshoe_bronzeo.png"},
