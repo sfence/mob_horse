@@ -84,7 +84,7 @@ mobs:register_mob("mob_horse:horse", {
 	armor = 200,
 	lava_damage = 5,
 	fall_damage = 5,
-	water_damage = 1,
+	water_damage = 0,
 	makes_footstep_sound = true,
 	drops = {
 		{name = "mobs:leather", chance = 1, min = 0, max = 2}
