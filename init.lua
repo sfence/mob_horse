@@ -42,6 +42,8 @@ local shoes = {
 	["mobs:horseshoe_crystal"] = {11, 6, 9, "mobs_horseshoe_crystalo.png"}
 }
 
+-- readable by other players?
+local anyone_rideable = minetest.settings:get_bool("mob_horse_rideable_by_anyone")
 
 -- rideable horse
 mobs:register_mob("hades_horse:horse", {
@@ -161,7 +163,7 @@ mobs:register_mob("hades_horse:horse", {
 		local player_name = clicker:get_player_name()
 
 		-- make sure tamed horse is being clicked by owner only
-		if self.tamed and self.owner == player_name then
+		if self.tamed and (anyone_rideable or (self.owner == player_name)) then
 
 			local inv = clicker:get_inventory()
 			local tool = clicker:get_wielded_item()
@@ -245,7 +247,7 @@ mobs:register_mob("hades_horse:horse", {
 		if mobs:capture_mob(self, clicker, nil, nil, 100, false, nil) then return end
 
 		-- ride horse if saddled
-		if self.saddle and self.owner == player_name then
+		if self.saddle and (anyone_rideable or (self.owner == player_name)) then
 			mobs.attach(self, clicker)
 		end
 	end
